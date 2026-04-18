@@ -35,7 +35,6 @@
   - [Console Output](#console-output)
   - [Generated Graphs](#generated-graphs)
 - [Results & Analysis](#results--analysis)
-- [Team](#team--group-15)
 
 ---
 
@@ -56,11 +55,11 @@ The simulation applies yield shocks of **±1%** and **±2%** to a base YTM of **
 
 All bonds share a **Face Value (FV) = ₹1,000** and are evaluated at a **Base YTM = 6%**.
 
-| Bond | Member | Maturity (n) | Coupon Rate (c) | Annual Coupon (C) | Pricing Relationship |
-|:----:|--------|:------------:|:---------------:|:-----------------:|:--------------------:|
-| **A** | Yash | 2 years | 8% | ₹80 | Premium (c > YTM) |
-| **B** | Sai | 5 years | 6% | ₹60 | Par (c = YTM) |
-| **C** | Suganthan | 10 years | 4% | ₹40 | Discount (c < YTM) |
+| Bond | Category | Maturity (n) | Coupon Rate (c) | Annual Coupon (C) | Pricing Relationship |
+|:----:|----------|:------------:|:---------------:|:-----------------:|:--------------------:|
+| **A** | Short-Term | 2 years | 8% | ₹80 | Premium (c > YTM) |
+| **B** | Medium-Term | 5 years | 6% | ₹60 | Par (c = YTM) |
+| **C** | Long-Term | 10 years | 4% | ₹40 | Discount (c < YTM) |
 
 > **Note:** Bond A trades at a **premium** because its coupon (8%) exceeds the market yield (6%). Bond B trades at **par** because its coupon equals the yield. Bond C trades at a **discount** because its coupon (4%) is below the yield.
 
@@ -234,7 +233,7 @@ simulate_bond()
 
 ### Visualization Pipeline
 
-The plotting section ([lines 233–382](simulation.py#L233-L382)) generates four publication-quality graphs:
+The plotting section ([lines 233–381](simulation.py#L233-L381)) generates four publication-quality graphs:
 
 ```
 Figure Layout (20 × 15 inches)
@@ -252,9 +251,9 @@ Figure Layout (20 × 15 inches)
 
 | Element | Color | Hex |
 |---------|-------|-----|
-| Bond A (Yash, 2Y) | 🔵 Blue | `#2563EB` |
-| Bond B (Sai, 5Y) | 🟢 Green | `#16A34A` |
-| Bond C (Suganthan, 10Y) | 🔴 Red | `#DC2626` |
+| Bond A (Short-Term, 2Y) | 🔵 Blue | `#2563EB` |
+| Bond B (Medium-Term, 5Y) | 🟢 Green | `#16A34A` |
+| Bond C (Long-Term, 10Y) | 🔴 Red | `#DC2626` |
 | Actual Price Curve | ⚫ Dark | `#1e1e2e` |
 | Duration Estimate | 🟡 Amber | `#f59e0b` |
 | Convexity Estimate | 🟣 Violet | `#7c3aed` |
@@ -319,7 +318,7 @@ For each bond, the simulation prints three tables:
 █████████████████████████████████████████████████████████████████
 
 =================================================================
-  Yash's Bond  (2Y, 8% Coupon)
+  Bond A  —  Short-Term   (2Y, 8% Coupon)
   Coupon: 8%  |  Maturity: 2Y  |  FV: ₹1000
 =================================================================
   Base Price        : ₹ 1036.6679
@@ -371,9 +370,9 @@ The simulation produces `bond_analysis_graphs.png` — a composite figure with 4
 | # | Plot | What It Shows |
 |:-:|------|---------------|
 | 1 | **Price vs. Yield (All Bonds)** | Overlay of three price-yield curves from 1%–15% YTM. Demonstrates how longer maturity bonds exhibit steeper curves (higher interest rate sensitivity). |
-| 2 | **Bond A — 2Y, 8% Coupon** | Actual vs. estimated prices. Duration and convexity estimates are nearly identical for short-maturity bonds. |
-| 3 | **Bond B — 5Y, 6% Coupon** | Moderate divergence between duration-only and actual prices at ±2%. Convexity correction significantly reduces error. |
-| 4 | **Bond C — 10Y, 4% Coupon** | Maximum divergence. Duration-only estimate is off by ₹13.95 at −2% shock. Convexity adjustment reduces this to ₹1.00. |
+| 2 | **Bond A — Short-Term (2Y, 8%)** | Actual vs. estimated prices. Duration and convexity estimates are nearly identical for short-maturity bonds. |
+| 3 | **Bond B — Medium-Term (5Y, 6%)** | Moderate divergence between duration-only and actual prices at ±2%. Convexity correction significantly reduces error. |
+| 4 | **Bond C — Long-Term (10Y, 4%)** | Maximum divergence. Duration-only estimate is off by ₹13.95 at −2% shock. Convexity adjustment reduces this to ₹1.00. |
 
 ---
 
@@ -422,12 +421,12 @@ This is where the value of convexity becomes most apparent:
 ```
 FinancialModeling/
 │
-├── simulation.py                # Main simulation script (382 lines)
+├── simulation.py                # Main simulation script (381 lines)
 │   ├── Core Functions           #   Lines 24–94: bond_price, duration, convexity
 │   ├── Estimation Functions     #   Lines 101–118: linear & quadratic estimates
 │   ├── Simulation Engine        #   Lines 125–195: simulate_bond()
-│   ├── Configuration            #   Lines 202–210: bond definitions
-│   └── Visualization            #   Lines 233–382: matplotlib plotting
+│   ├── Configuration            #   Lines 201–209: bond definitions
+│   └── Visualization            #   Lines 233–381: matplotlib plotting
 │
 ├── bond_analysis_graphs.png     # Generated output plot (4 graphs)
 ├── .gitignore                   # Git ignore rules
@@ -446,17 +445,6 @@ FinancialModeling/
 | `matplotlib` | ≥ 3.7 | All graph generation, tick formatting, layout |
 
 > Both are included in the default **Anaconda** distribution. No additional installation needed if using `conda`.
-
----
-
-## Team — Group 15
-
-| Member | Role | Contribution |
-|--------|------|-------------|
-| **Yash** | Bond A Analyst | 2-year, 8% coupon bond — analysis & documentation |
-| **Sai** | Bond B Analyst | 5-year, 6% coupon bond — analysis & documentation |
-| **Suganthan** | Bond C Analyst | 10-year, 4% coupon bond — analysis & documentation |
-| **Mitesh** | Developer | Python implementation, simulation engine & visualization |
 
 ---
 
