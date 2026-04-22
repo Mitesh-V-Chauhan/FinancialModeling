@@ -1,5 +1,4 @@
 import { useState, useMemo } from "react";
-import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Slider } from "@/components/ui/slider";
 import { BONDS } from "@/lib/bond-data";
@@ -15,20 +14,7 @@ import {
   CashFlowChart,
 } from "@/components/charts/BarCharts";
 
-export const Route = createFileRoute("/")({
-  component: Dashboard,
-  head: () => ({
-    meta: [
-      { title: "Bond Risk Lab · Group 15" },
-      {
-        name: "description",
-        content: "Duration, convexity and interest rate risk simulator.",
-      },
-    ],
-  }),
-});
-
-function Dashboard() {
+export default function App() {
   const [selected, setSelected] = useState<string>("B2");
   const [bps, setBps] = useState(0);
 
